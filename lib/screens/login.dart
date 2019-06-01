@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'clipper.dart';
+import 'package:hackthon2019/screens/ui_components/clipper.dart';
 import 'package:hackthon2019/screens/home.dart';
 import 'package:hackthon2019/main.dart';
 
@@ -102,6 +102,7 @@ Container _buildLoginForm(BuildContext context) {
                 Container(
                     padding: EdgeInsets.symmetric(horizontal: 20.0),
                     child: TextField(
+                      obscureText: true,
                       style: TextStyle(color: Colors.blue),
                       decoration: InputDecoration(
                           hintText: "Password",

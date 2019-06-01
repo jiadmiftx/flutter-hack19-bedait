@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hackthon2019/screens/typografi.dart';
+import 'package:hackthon2019/screens/ui_components/typografi.dart';
 
 
 class ProfilePage extends StatelessWidget {

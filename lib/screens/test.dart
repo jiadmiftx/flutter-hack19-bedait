@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:hackthon2019/models/CommunitiesModel.dart';
 import 'detail.dart';
-import 'clipper.dart';
+import 'package:hackthon2019/screens/ui_components/clipper.dart';
 
 class Test extends StatefulWidget {
   @override
