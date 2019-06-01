@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_database/firebase_database.dart';
-
-final databaseReference = FirebaseDatabase.instance.reference();
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:hackthon2019/models/CommunitiesModel.dart';
 
 final List rooms = [
   {
@@ -30,13 +29,129 @@ final List rooms = [
   },
 ];
 
-class HotelHomePage extends StatelessWidget {
-  void getData() {
-    databaseReference.once().then((DataSnapshot snapshot) {
-      print('Data : ${snapshot.value}');
+class CommunityCard extends StatefulWidget {
+  @override
+  _CommunityCardState createState() => _CommunityCardState();
+}
+
+class _CommunityCardState extends State<CommunityCard> {
+  var listCommunities = List<Communities>();
+
+  @override
+  void initState() {
+    super.initState();
+    getData();
+  }
+
+  List<Communities> getData() {
+    Firestore.instance.collection('communities').snapshots().listen((value) {
+      listCommunities =
+          value.documents.map((doc) => Communities.fromDocument(doc)).toList();
+      // return communities;
+
+       listCommunities.forEach((community) => {
+        print("Community ID: ${community.id}"),
+        print("Community Name : ${community.name}"),
+        print("Community Image: ${community.image}"),
+        print("Community Category: ${community.categories}"),
+        print("Community Member: ${community.member}"),
+        print("Community Location: ${community.location}")
+       });
     });
   }
 
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.all(20.0),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(5.0),
+        child: Container(
+          child: Material(
+            elevation: 5.0,
+            borderRadius: BorderRadius.circular(5.0),
+            color: Colors.white,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Stack(
+                  children: <Widget>[
+                    Image.asset(room['image']),
+                    Positioned(
+                      right: 10,
+                      top: 10,
+                      child: Icon(
+                        Icons.favorite,
+                        color: Colors.grey.shade800,
+                        size: 28.0,
+                      ),
+                    ),
+                    Positioned(
+                      right: 8,
+                      top: 8,
+                      child: Icon(
+                        Icons.favorite_border,
+                        color: Colors.white,
+                        size: 32.0,
+                      ),
+                    ),
+                  ],
+                ),
+                Container(
+                  padding: EdgeInsets.all(16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        room['title'],
+                        style: TextStyle(
+                            fontSize: 18.0, fontWeight: FontWeight.bold),
+                      ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          Icon(
+                            Icons.location_on,
+                            color: Colors.blue,
+                          ),
+                          SizedBox(
+                            width: 5.0,
+                          ),
+                          Text(
+                            room['location'],
+                            style: TextStyle(color: Colors.black),
+                          )
+                        ],
+                      ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          Icon(
+                            Icons.group,
+                            color: Colors.blue,
+                          ),
+                          SizedBox(
+                            width: 5.0,
+                          ),
+                          Text(
+                            room['member'] + " People",
+                            style: TextStyle(color: Colors.black),
+                          )
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class HotelHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,7 +169,7 @@ class HotelHomePage extends StatelessWidget {
                 color: Colors.white,
               ),
               onPressed: () {
-                getData();
+                //  @TODO 
               },
             ),
             actions: <Widget>[
@@ -117,6 +232,7 @@ class HotelHomePage extends StatelessWidget {
 
   Widget _buildRooms(BuildContext context, int index) {
     var room = rooms[index % rooms.length];
+
     return Container(
       margin: EdgeInsets.all(20.0),
       child: ClipRRect(
