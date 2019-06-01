@@ -1,6 +1,6 @@
 # BedaIT - hackthon2019
 
-A new Flutter project.
+This app we call bedaIT, in sasak (Tribe of indonesia ) that mean meeting. Main idea of this application is t make community to create event, this app had a very basic function like create community, join community and make event
 
 ## Getting Started
 
