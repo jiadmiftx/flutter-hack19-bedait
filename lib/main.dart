@@ -16,12 +16,12 @@ class _BottomNavBarState extends State<BottomNavBar> {
   int pageIndex = 0;
 
   //Membuat Pages
-  final HotelHomePage _home = HotelHomePage();
+  final HomeScreen _home = HomeScreen();
   final Headset _headset = Headset();
   final Hubs  _hubs = Hubs();
   final Had _had = Had();
 
-  Widget _showPage = new HotelHomePage();
+  Widget _showPage = new HomeScreen();
 
   Widget _pageChooser(int page){
     switch (page) {
