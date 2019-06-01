@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:hackthon2019/screens/Profile.dart';
-import 'package:hackthon2019/screens/had.dart';
 import 'package:hackthon2019/screens/headset.dart';
-import 'package:hackthon2019/screens/home.dart';
-import 'package:hackthon2019/screens/hubs.dart';
 import 'package:hackthon2019/screens/login.dart';
-import 'package:hackthon2019/screens/test.dart';
+import 'package:hackthon2019/screens/home.dart';
 
 void main() => runApp(MaterialApp(home: LoginPage()));
 
@@ -19,34 +16,30 @@ class _BottomNavBarState extends State<BottomNavBar> {
   int pageIndex = 0;
 
   //Membuat Pages
-  final HotelHomePage _home = HotelHomePage();
+  // final HotelHomePage _home = HotelHomePage();
   final MyCommunityPage _headset = MyCommunityPage();
   final ProfilePage _had = ProfilePage();
-  final Test _test = Test();
+  final Home _home = Home();
 
-  Widget _showPage = new HotelHomePage();
+  Widget _showPage = new Home();
 
-  Widget _pageChooser(int page){
+  Widget _pageChooser(int page) {
     switch (page) {
       case 0:
-      return _test;
-      break;
+        return _home;
+        break;
       case 1:
-      return _headset;
-      break;
+        return _headset;
+        break;
       case 2:
-      return _had;
-      break;
+        return _had;
+        break;
       default:
-      return new Container(
-        child: new Center(
-          child: Text('No Page Found'),
-        ),
-      );
-      
-      
-        
-  
+        return new Container(
+          child: new Center(
+            child: Text('No Page Found'),
+          ),
+        );
     }
   }
 
@@ -55,7 +48,6 @@ class _BottomNavBarState extends State<BottomNavBar> {
     return Scaffold(
         bottomNavigationBar: CurvedNavigationBar(
           initialIndex: pageIndex,
-     
           items: <Widget>[
             Icon(Icons.home, size: 30),
             Icon(Icons.list, size: 30),
