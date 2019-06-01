@@ -4,8 +4,9 @@ import 'package:hackthon2019/screens/had.dart';
 import 'package:hackthon2019/screens/headset.dart';
 import 'package:hackthon2019/screens/home.dart';
 import 'package:hackthon2019/screens/hubs.dart';
-
-void main() => runApp(MaterialApp(home: BottomNavBar()));
+import 'package:hackthon2019/screens/login.dart';
+import 'package:hackthon2019/screens/signup.dart';
+void main() => runApp(MaterialApp(home: LoginPage()));
 
 class BottomNavBar extends StatefulWidget {
   @override
