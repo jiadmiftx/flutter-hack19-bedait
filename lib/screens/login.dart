@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
-import 'package:hackthon2019/screens/signup.dart';
+import 'package:hackthon2019/screens/home.dart';
+import 'package:hackthon2019/main.dart';
 
 class LoginPage extends StatelessWidget {
+
   Widget _buildPageContent(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
@@ -135,7 +137,10 @@ class LoginPage extends StatelessWidget {
                   height: 40,
                   width: 260,
                   child: RaisedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      // Navigator.push(context, MaterialPageRoute(
+                      //     builder: (BuildContext context) => HomeScreen()));
+                    },
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(40.0)),
                     child:
