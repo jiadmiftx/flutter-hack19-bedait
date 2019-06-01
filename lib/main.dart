@@ -5,6 +5,7 @@ import 'package:hackthon2019/screens/headset.dart';
 import 'package:hackthon2019/screens/home.dart';
 import 'package:hackthon2019/screens/hubs.dart';
 import 'package:hackthon2019/loginscreen/login.dart';
+import 'package:hackthon2019/screens/mycommunity.dart';
 void main() => runApp(MaterialApp(home: BottomNavBar()));
 
 class BottomNavBar extends StatefulWidget {
@@ -16,13 +17,13 @@ class _BottomNavBarState extends State<BottomNavBar> {
   int pageIndex = 0;
 
   //Membuat Pages
-  final HotelHomePage _home = HotelHomePage();
+  final HomeScreen _home = HomeScreen();
   final Headset _headset = Headset();
   final Hubs  _hubs = Hubs();
   final Had _had = Had();
-  final LoginPage _login = LoginPage();
+  final MyCommunityPage _mycommunity = MyCommunityPage();
 
-  Widget _showPage = new HotelHomePage();
+  Widget _showPage = new HomeScreen();
 
   Widget _pageChooser(int page){
     switch (page) {
@@ -30,7 +31,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
       return _home;
       break;
       case 1:
-      return _headset;
+      return _mycommunity;
       break;
       case 2:
       return _hubs;
@@ -38,9 +39,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
       case 3:
       return _had;
       break;
-      case 4:
-      return _login;
-      break;
+
       default:
       return new Container(
         child: new Center(
