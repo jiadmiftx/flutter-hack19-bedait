@@ -29,129 +29,17 @@ final List rooms = [
   },
 ];
 
-class CommunityCard extends StatefulWidget {
-  @override
-  _CommunityCardState createState() => _CommunityCardState();
-}
-
-class _CommunityCardState extends State<CommunityCard> {
-  var listCommunities = List<Communities>();
-
-  @override
-  void initState() {
-    super.initState();
-    getData();
-  }
-
-  List<Communities> getData() {
-    Firestore.instance.collection('communities').snapshots().listen((value) {
-      listCommunities =
-          value.documents.map((doc) => Communities.fromDocument(doc)).toList();
-      // return communities;
-
-       listCommunities.forEach((community) => {
-        print("Community ID: ${community.id}"),
-        print("Community Name : ${community.name}"),
-        print("Community Image: ${community.image}"),
-        print("Community Category: ${community.categories}"),
-        print("Community Member: ${community.member}"),
-        print("Community Location: ${community.location}")
-       });
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.all(20.0),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(5.0),
-        child: Container(
-          child: Material(
-            elevation: 5.0,
-            borderRadius: BorderRadius.circular(5.0),
-            color: Colors.white,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Stack(
-                  children: <Widget>[
-                    Image.asset(room['image']),
-                    Positioned(
-                      right: 10,
-                      top: 10,
-                      child: Icon(
-                        Icons.favorite,
-                        color: Colors.grey.shade800,
-                        size: 28.0,
-                      ),
-                    ),
-                    Positioned(
-                      right: 8,
-                      top: 8,
-                      child: Icon(
-                        Icons.favorite_border,
-                        color: Colors.white,
-                        size: 32.0,
-                      ),
-                    ),
-                  ],
-                ),
-                Container(
-                  padding: EdgeInsets.all(16.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(
-                        room['title'],
-                        style: TextStyle(
-                            fontSize: 18.0, fontWeight: FontWeight.bold),
-                      ),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          Icon(
-                            Icons.location_on,
-                            color: Colors.blue,
-                          ),
-                          SizedBox(
-                            width: 5.0,
-                          ),
-                          Text(
-                            room['location'],
-                            style: TextStyle(color: Colors.black),
-                          )
-                        ],
-                      ),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          Icon(
-                            Icons.group,
-                            color: Colors.blue,
-                          ),
-                          SizedBox(
-                            width: 5.0,
-                          ),
-                          Text(
-                            room['member'] + " People",
-                            style: TextStyle(color: Colors.black),
-                          )
-                        ],
-                      )
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
 class HotelHomePage extends StatelessWidget {
+  // var listCommunities = List<Communities>();
+  
+  // void getCommunities() {
+  //   Firestore.instance.collection('communities').snapshots().listen((value) {
+  //     listCommunities =
+  //         value.documents.map((doc) => Communities.fromDocument(doc)).toList();
+  //   });
+  //   print("DATAAAAA"+listCommunities.toString());
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -169,7 +57,7 @@ class HotelHomePage extends StatelessWidget {
                 color: Colors.white,
               ),
               onPressed: () {
-                //  @TODO 
+                //  @TODO
               },
             ),
             actions: <Widget>[
@@ -219,16 +107,55 @@ class HotelHomePage extends StatelessWidget {
           SliverToBoxAdapter(
             child: _buildCategories(),
           ),
-          SliverList(
-            delegate:
-                SliverChildBuilderDelegate((BuildContext context, int index) {
-              return _buildRooms(context, index);
-            }, childCount: 3),
-          )
+          // SliverList(
+          //   delegate:
+          //       SliverChildBuilderDelegate((BuildContext context, int index) {
+          //     return _buildRooms(context, index);
+          //   }, childCount: rooms.length),
+          // )
         ],
       ),
     );
   }
+
+  // Widget _buildListView(BuildContext context){
+  //   return Scaffold(
+  //       body: ListView.builder(
+  //       itemCount: listCommunities.length,
+  //       itemBuilder: (context, index) {
+  //         if (listCommunities == null) {
+  //           return Text("Loading");
+  //         } else {
+  //           return InkWell(
+  //             onTap: () => {},
+  //             child: Padding(
+  //               padding: const EdgeInsets.all(4.0),
+  //               child: Card(
+  //                 margin: EdgeInsets.all(2.0),
+  //                 child: Column(
+  //                   mainAxisSize: MainAxisSize.min,
+  //                   children: <Widget>[
+  //                     ListTile(
+  //                       leading: Icon(Icons.person),
+  //                       title:  Text(
+  //                       listCommunities[index].name,
+  //                       style: TextStyle(fontSize: 24),
+                        
+  //                     ),
+  //                     subtitle: Text(listCommunities[index].location),
+  //                     ),
+                     
+                      
+  //                   ],
+  //                 ),
+  //               ),
+  //             ),
+  //           );
+  //         }
+  //       },
+  //     ),
+  //   );
+  // }
 
   Widget _buildRooms(BuildContext context, int index) {
     var room = rooms[index % rooms.length];
