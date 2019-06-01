@@ -1,4 +1,4 @@
-# hackthon2019
+# BedaIT - hackthon2019
 
 A new Flutter project.
 
