@@ -37,7 +37,7 @@ class HotelHomePage extends StatelessWidget {
         slivers: <Widget>[
           SliverAppBar(
             expandedHeight: 180.0,
-          
+            
             // backgroundColor: Colors.cyan,
                       
             leading: IconButton(
